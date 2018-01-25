@@ -54,6 +54,7 @@ AAsuraCharacter::AAsuraCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
 }
 
 void AAsuraCharacter::Tick(float DeltaSeconds)
@@ -86,4 +87,53 @@ void AAsuraCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+}
+
+
+
+void AAsuraCharacter::OnAttributesChanged()
+{
+	
+	// DO STRENGTH
+	// Every 2 Strength is +1 to life 
+	int32 LifeToAdd = Strength / 2;
+	// Every 5 Strength is +1% Melee Physical Damage
+	int32 MeleePhysDamageBonusFromStrength = Strength / 5; // %
+
+	Life = Life + LifeToAdd;
+	MeleePhysicalDamage = MeleePhysicalDamage + MeleePhysDamageBonusFromStrength;
+	
+	// DO DEXTERITY
+	// Every 1 Dexterity is +2 to accuracy rating
+	int32 AccuracyRatingToAdd = Dexterity * 2;
+	// Every 5 Dexterity is +1% evasion rating
+	int32 EvasionRatingToAdd = Dexterity / 5;
+
+	AccuracyRating = AccuracyRating + AccuracyRatingToAdd;
+	EvasionRating = EvasionRating + EvasionRatingToAdd;
+
+	// DO INTELLIGENCE
+	// Every 2 Intelligence is +1 to mana 
+	int32 ManaToAdd = Intelligence / 2;
+	// Every 5 Intelligence is +1% Energy Shield
+	int32 EnergyShieldBonusFromIntelligence = Intelligence / 5; // %
+
+	Mana = Mana + ManaToAdd;
+	//MaximumEnergyShield = MaximumEnergyShield + EnergyShieldBonusFromIntelligence;
+	int32 NewMaxEnergyShield = 0;
+	int32 AmountOfEnergyShieldToAdd = (EnergyShieldBonusFromIntelligence * MaximumEnergyShield) / 100;
+
+	NewMaxEnergyShield = MaximumEnergyShield + AmountOfEnergyShieldToAdd;
+	MaximumEnergyShield = NewMaxEnergyShield;
+
+
+}
+
+void AAsuraCharacter::OnLevelUp()
+{
+	Life = Life + 12;
+	Mana = Mana + 6;
+	EvasionRating = EvasionRating + 3;
+	AccuracyRating + AccuracyRating + 2;
+
 }

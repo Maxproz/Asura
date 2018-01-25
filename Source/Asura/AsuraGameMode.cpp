@@ -15,6 +15,7 @@ AAsuraGameMode::AAsuraGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+
 	}
 
 
