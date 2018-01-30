@@ -21,7 +21,7 @@ class ASURA_API UWeaponFormulas : public UObject
 public:
 	
 	// https://www.vcalc.com/wiki/vCalc/Weapon+Physical+DPS+Calculator
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetWeaponPhysicalDPS(const uint32& MinPhysDmg, const uint32& MaxPhysDmg, const double& AttackSpeed)
 	{
 		double WeapPhysDPS = ((MinPhysDmg + MaxPhysDmg) / 2) * AttackSpeed;
@@ -30,8 +30,8 @@ public:
 
 	// TODO: MAXPRO: Add calulation that includes chaos dmg
 	// https://www.vcalc.com/wiki/vCalc/Weapon+Elemental+DPS
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-	static double GetWeaponPhysicalDPS(const uint32& MinPhysDmg, const uint32& MaxPhysDmg,
+	UFUNCTION(Category = "Combat")
+	static double GetWeaponTotalDPS(const uint32& MinPhysDmg, const uint32& MaxPhysDmg,
 		const uint32& MinFireDmg, const uint32& MaxFireDmg, 
 		const uint32& MinColdDmg, const uint32& MaxColdDmg, 
 		const uint32& MinLightningDmg, const uint32& MaxLightningDmg,
@@ -44,7 +44,7 @@ public:
 	}
 	
 	// http://poecraft.com/article/5/defenses-armour
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetPhysicalDmgReduction(const uint32& Armour, const uint32& PhysicalDamage)
 	{
 		// PhyscialDamageReduction is returned as a percentage
@@ -53,7 +53,7 @@ public:
 	}
 
 	// https://pathofexile.gamepedia.com/Monster_damage
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetMonsterDamage(const uint32& MonsterLevel)
 	{
 		double MonsterDamage = 17.16117 * pow(EulerE, (0.0495 * MonsterLevel)) - 13.1;
@@ -62,21 +62,21 @@ public:
 
 	// Accuracy Evasion Formulas are described in the link below, are used in the following 4 functions.
 	// https://docs.google.com/spreadsheets/d/1kCeAy43G3LiL0NMFVEgrLy0Uf1DXMjuyx_-7hRq47y4/edit#gid=8
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetAttackersChanceToHit(const double& AttackersAccuracy, const double& DefendersEvasion)
 	{
 		double AttackersChanceToHit = AttackersAccuracy / (AttackersAccuracy + (pow(DefendersEvasion / 4, 0.8)));
 		return AttackersChanceToHit; // %
 	}
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetAttackersAccuracy(const double& AttackersChanceToHit, const double& DefendersEvasion)
 	{
 		double AttackersAccuracy = (AttackersChanceToHit * ((pow(DefendersEvasion / 4, 0.8)))) / 1 - AttackersChanceToHit;
 		return AttackersAccuracy; // %
 	}
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetDefendersChanceToEvade(const double& AttackersAccuracy, const double& DefendersEvasion)
 	{
 		double DefendersChanceToEvade = 1 - (AttackersAccuracy /
@@ -85,7 +85,7 @@ public:
 		return DefendersChanceToEvade; // %
 	}
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
+	UFUNCTION(Category = "Combat")
 	static double GetDefendersEvasion(const double& AttackersAccuracy, const double& DefendersChanceToEvade)
 	{
 		double DefendersEvasion = 4 * (pow(((AttackersAccuracy * DefendersChanceToEvade) /

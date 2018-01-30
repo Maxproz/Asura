@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Weapons/WeaponFormulas.h"
+
 #include "AsuraCharacter.generated.h"
 
-#include "Weapons/WeaponFormulas.h"
+
 
 // TODO: MAXPRO: Temp variables for testing move them later
 // https://docs.google.com/spreadsheets/d/1kCeAy43G3LiL0NMFVEgrLy0Uf1DXMjuyx_-7hRq47y4/edit#gid=17
@@ -19,8 +21,7 @@ const double MonsterAverageEvasionAtLevelOne = 36.0;
 for float x and negative y*/
 //#include<stdio.h>
 
-// Experience Map
-TMap<uint32, uint64> ExperienceToGainToNextLevel;
+
 
 
 inline float power(double x, int y)
@@ -65,6 +66,9 @@ public:
 	uint32 Level = 1; // (All Characters start at level 1.
 	uint64 TotalExperience = 0; // Player Starts at 0 exp
 	//uint64 ExperienceToGain = 525; // 525 experience to level 2
+
+	// Experience Map
+	TMap<uint32, uint64> ExperienceToGainToNextLevel;
 
 	void InitializeExpToGainMap();
 
