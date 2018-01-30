@@ -14,6 +14,10 @@ class AAsuraPlayerController : public APlayerController
 public:
 	AAsuraPlayerController();
 
+	class AAsuraPlayerHUD* PlayerHUD;//  = GetHUD();
+
+	virtual void BeginPlay();
+
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -39,7 +43,7 @@ protected:
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
 
-
+	
 
 };
 

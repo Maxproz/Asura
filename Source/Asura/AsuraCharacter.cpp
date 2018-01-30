@@ -11,6 +11,11 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
 
+#include "AsuraPlayerState.h"
+#include "AsuraPlayerController.h"
+#include "Kismet/GameplayStatics.h"
+
+
 AAsuraCharacter::AAsuraCharacter()
 {
 
@@ -57,6 +62,10 @@ AAsuraCharacter::AAsuraCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	
+	//AsuraPlayerState = Cast<AAsuraPlayerState>(UGameplayStatics::GetPlayerController(this->GetWorld(), 0)->PlayerState);
+	//AsuraPlayerController = Cast<AAsuraPlayerController>(UGameplayStatics::GetPlayerController(this->GetWorld(), 0));
+	//AsuraPlayerState = Cast<AAsuraPlayerState>(AsuraPlayerController->PlayerState);
 
 }
 
@@ -80,7 +89,7 @@ void AAsuraCharacter::Tick(float DeltaSeconds)
 				CursorToWorld->SetWorldLocationAndRotation(HitResult.Location, SurfaceRotation);
 			}
 		}
-		else if (APlayerController* PC = Cast<APlayerController>(GetController()))
+		else if (AAsuraPlayerController* PC = Cast<AAsuraPlayerController>(GetController()))
 		{
 			FHitResult TraceHitResult;
 			PC->GetHitResultUnderCursor(ECC_Visibility, true, TraceHitResult);

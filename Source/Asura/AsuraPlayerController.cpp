@@ -6,10 +6,30 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "AsuraCharacter.h"
 
+#include "AsuraPlayerHUD.h"
+
 AAsuraPlayerController::AAsuraPlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
+
+	
+
+}
+
+void AAsuraPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (IsLocalPlayerController())
+	{
+		PlayerHUD = Cast<AAsuraPlayerHUD>(GetHUD());
+		PlayerHUD->CreateGameWidgets();
+
+	}
+
+	//PlayerHUD->GetCharacterSelectionUIWidget()->AddToViewport(1);
+	//PlayerHUD->GetCharacterSelectionUIWidget()->SetIsEnabled(true);
 }
 
 void AAsuraPlayerController::PlayerTick(float DeltaTime)
@@ -21,6 +41,7 @@ void AAsuraPlayerController::PlayerTick(float DeltaTime)
 	{
 		MoveToMouseCursor();
 	}
+	
 }
 
 void AAsuraPlayerController::SetupInputComponent()

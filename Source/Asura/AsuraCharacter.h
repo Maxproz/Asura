@@ -59,6 +59,10 @@ public:
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 
+
+	//class AAsuraPlayerState* AsuraPlayerState;
+	class AAsuraPlayerController* AsuraPlayerController;
+
 // protected: // TODO: Maxpro: Can I use protected for at least some of these? test later
 
 
