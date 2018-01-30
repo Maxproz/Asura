@@ -14,3 +14,5 @@ DECLARE_LOG_CATEGORY_EXTERN(LogAsura, Log, All);
 // TODO: MAXPRO: Need to setup a better datatable system for reading and writing and organizing the monster accuracy and evasion tables listed below.
 // https://docs.google.com/spreadsheets/d/1kCeAy43G3LiL0NMFVEgrLy0Uf1DXMjuyx_-7hRq47y4/edit#gid=8
 // TODO: IMPORTANT: MAXPRO: Need to revisit those formulas on that link above and make sure mine are accurate.
+// TODO: MAXPRO: Add ways to add damage conversion once damage is implemented. https://pathofexile.gamepedia.com/Damage_conversion
+

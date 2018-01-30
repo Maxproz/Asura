@@ -13,6 +13,9 @@
 
 AAsuraCharacter::AAsuraCharacter()
 {
+
+	InitializeExpToGainMap();
+
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -87,6 +90,24 @@ void AAsuraCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+}
+
+void AAsuraCharacter::InitializeExpToGainMap()
+{
+	ExperienceToGainToNextLevel.Add(1, 525);
+	ExperienceToGainToNextLevel.Add(2, 1235);
+	ExperienceToGainToNextLevel.Add(3, 2021);
+	ExperienceToGainToNextLevel.Add(4, 3403);
+	ExperienceToGainToNextLevel.Add(5, 5002);
+	ExperienceToGainToNextLevel.Add(6, 7138);
+	ExperienceToGainToNextLevel.Add(7, 10053);
+	ExperienceToGainToNextLevel.Add(8, 13804);
+	ExperienceToGainToNextLevel.Add(9, 18512);
+	ExperienceToGainToNextLevel.Add(10, 24297);
+
+	// TODO: MAXPRO: Fill in the rest later if this system works...
+	// https://pathofexile.gamepedia.com/Experience
+
 }
 
 

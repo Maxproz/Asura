@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "AsuraCharacter.generated.h"
 
+#include "Weapons/WeaponFormulas.h"
+
 // TODO: MAXPRO: Temp variables for testing move them later
 // https://docs.google.com/spreadsheets/d/1kCeAy43G3LiL0NMFVEgrLy0Uf1DXMjuyx_-7hRq47y4/edit#gid=17
 const double MonsterAverageAccuracyAtLevelOne = 18.0;
@@ -15,7 +17,11 @@ const double MonsterAverageEvasionAtLevelOne = 36.0;
 
 /* Extended version of power function that can work
 for float x and negative y*/
-#include<stdio.h>
+//#include<stdio.h>
+
+// Experience Map
+TMap<uint32, uint64> ExperienceToGainToNextLevel;
+
 
 inline float power(double x, int y)
 {
@@ -57,6 +63,12 @@ public:
 
 	// *************************************  MAJOR CHARACTER STATS *************************************
 	uint32 Level = 1; // (All Characters start at level 1.
+	uint64 TotalExperience = 0; // Player Starts at 0 exp
+	//uint64 ExperienceToGain = 525; // 525 experience to level 2
+
+	void InitializeExpToGainMap();
+
+
 	uint32 PassiveSkillPoints = 0; // (characters dont get passive skill points until they at least reach lvl 2)
 	
 	// The following stats are the same for all new characters, and gain the same amount per level.
@@ -104,8 +116,10 @@ public:
 			double AttackersAccuracy = AccuracyRating;
 			double DefendersEvasion = MonsterAverageEvasionAtLevelOne;
 			
-			UpdatedChanceToHit =
-				AttackersAccuracy / (AttackersAccuracy + (power(DefendersEvasion / 4, 0.8)));
+			UpdatedChanceToHit = UWeaponFormulas::GetAttackersChanceToHit(AttackersAccuracy, DefendersEvasion);
+
+			//UpdatedChanceToHit =
+			//	AttackersAccuracy / (AttackersAccuracy + (power(DefendersEvasion / 4, 0.8)));
 		}
 
 		ChanceToHit = UpdatedChanceToHit;
@@ -122,11 +136,13 @@ public:
 		// Temp code , reinforce how we read the current monster level matching player level data later
 		if (Level == 1)
 		{
+			
 			double AttackersAccuracy = MonsterAverageAccuracyAtLevelOne;
 			double DefendersEvasion = EvasionRating;
 
-			UpdatedChanceToEvade =
-				 1 - (AttackersAccuracy / (AttackersAccuracy + (power(DefendersEvasion / 4, 0.8))));
+			UpdatedChanceToEvade = UWeaponFormulas::GetDefendersChanceToEvade(AttackersAccuracy, DefendersEvasion);
+			//UpdatedChanceToEvade =
+			//	 1 - (AttackersAccuracy / (AttackersAccuracy + (power(DefendersEvasion / 4, 0.8))));
 		}
 
 		ChanceToEvade = UpdatedChanceToEvade;
@@ -153,6 +169,8 @@ public:
 	int32 ColdResistance = 0;
 	int32 LightningResistance = 0;
 	int32 ChaosResistance = 0;
+
+	
 
 
 	// More info here - https://www.pathofexile.com/forum/view-thread/529328/page/1#p4775019
