@@ -11,8 +11,6 @@ AAsuraPlayerHUD::AAsuraPlayerHUD(const FObjectInitializer& ObjectInitializer) : 
 	//CharSelectionUIWidget->SetIsEnabled(false);
 
 
-
-
 }
 
 
@@ -23,7 +21,7 @@ void AAsuraPlayerHUD::CreateCharacterSelectionWidget()
 	CharSelectionUIWidget = CreateWidget<UCharacterSelectionUI>(GetOwningPlayerController(), CharSelectionUI.LoadSynchronous());
 
 	CharSelectionUIWidget->AddToViewport(1);
-	CharSelectionUIWidget->SetVisibility(ESlateVisibility::Visible);
+	CharSelectionUIWidget->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void AAsuraPlayerHUD::CreateGameWidgets()

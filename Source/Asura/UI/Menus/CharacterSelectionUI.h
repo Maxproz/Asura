@@ -13,11 +13,32 @@ UCLASS()
 class ASURA_API UCharacterSelectionUI : public UUserWidget
 {
 	GENERATED_BODY()
+
+private:
+
+
+protected:
 	
-	
+	UPROPERTY(meta = (BindWidget))
+	class UButton* ChooseMarauderBtn;
+
+
+
 public:
 
+	virtual void NativeConstruct() override;
+	
+	
+	UFUNCTION()
+	void OnClickedChooseMarauderBtn();
+
+	UFUNCTION()
 	void ShowWidget();
+
+	UFUNCTION()
 	void HideWidget();
 	
+
+
+
 };

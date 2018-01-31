@@ -17,20 +17,8 @@ AAsuraGameMode::AAsuraGameMode()
 {
 	// use our custom PlayerController class
 	//PlayerControllerClass = AAsuraPlayerController::StaticClass();
-	PlayerControllerClass = AAsuraPlayerController::StaticClass();
-	//DefaultPawnClass = AAsuraMenuPawn::StaticClass();
-	//HUDClass = AAsuraPlayerHUD::StaticClass();
-	PlayerStateClass = AAsuraPlayerState::StaticClass();
-	//GameStateClass = AAsuraGameState::StaticClass();
+	//PlayerControllerClass = AAsuraPlayerController::StaticClass();
 
-	
-	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Classes/MarauderCharacter_BP"));
-	if (PlayerPawnBPClass.Class != NULL)
-	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
-
-	}
 
 	static ConstructorHelpers::FClassFinder<AAsuraPlayerHUD> PlayerHUDBPClass(TEXT("/Game/CoreGameplayBlueprints/AsuraPlayerHUD_BP"));
 	if (PlayerHUDBPClass.Class != NULL)
@@ -38,6 +26,31 @@ AAsuraGameMode::AAsuraGameMode()
 		HUDClass = PlayerHUDBPClass.Class;
 
 	}
+
+	//DefaultPawnClass = AAsuraMenuPawn::StaticClass();
+	//HUDClass = AAsuraPlayerHUD::StaticClass();
+	PlayerStateClass = AAsuraPlayerState::StaticClass();
+	//GameStateClass = AAsuraGameState::StaticClass();
+
+	static ConstructorHelpers::FClassFinder<AAsuraPlayerController> PlayerContBPClass(TEXT("/Game/CoreGameplayBlueprints/AsuraPlayerController_BP"));
+	if (PlayerContBPClass.Class != NULL)
+	{
+		PlayerControllerClass = PlayerContBPClass.Class;
+
+	}
+	
+	//// set default pawn class to our Blueprinted character
+	//static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Classes/MarauderCharacter_BP"));
+	//if (PlayerPawnBPClass.Class != NULL)
+	//{
+	//	DefaultPawnClass = PlayerPawnBPClass.Class;
+
+	//}
+
+
+	
+
+
 
 
 }

@@ -14,11 +14,25 @@ class AAsuraPlayerController : public APlayerController
 public:
 	AAsuraPlayerController();
 
-	class AAsuraPlayerHUD* PlayerHUD;//  = GetHUD();
+	class AAsuraPlayerHUD* AsuraPlayerHUD;//  = GetHUD();
+	class AAsuraPlayerState* AsuraPlayerState; 
 
 	virtual void BeginPlay();
 
+	UPROPERTY()
+	bool bCharacterSelected = false;
+
+	//class AMarauderCharacter* MarauderClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Characters")
+	TSubclassOf<class AMarauderCharacter> MarauderClassTemplate;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Characters")
+	TSubclassOf<class AAsuraCharacter> TestClassTemplate;
+
+
 protected:
+
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
 

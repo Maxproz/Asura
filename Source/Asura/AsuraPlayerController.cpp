@@ -7,6 +7,10 @@
 #include "AsuraCharacter.h"
 
 #include "AsuraPlayerHUD.h"
+#include "AsuraPlayerState.h"
+#include "Characters/MarauderCharacter.h"
+#include "Kismet/GameplayStatics.h"
+#include "UI/Menus/CharacterSelectionUI.h"
 
 AAsuraPlayerController::AAsuraPlayerController()
 {
@@ -21,10 +25,13 @@ void AAsuraPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AsuraPlayerState = Cast<AAsuraPlayerState>(PlayerState);
+
 	if (IsLocalPlayerController())
 	{
-		PlayerHUD = Cast<AAsuraPlayerHUD>(GetHUD());
-		PlayerHUD->CreateGameWidgets();
+		AsuraPlayerHUD = Cast<AAsuraPlayerHUD>(GetHUD());
+		AsuraPlayerHUD->CreateGameWidgets();
+		AsuraPlayerHUD->GetCharacterSelectionUIWidget()->ShowWidget();
 
 	}
 
@@ -41,7 +48,53 @@ void AAsuraPlayerController::PlayerTick(float DeltaTime)
 	{
 		MoveToMouseCursor();
 	}
-	
+
+
+
+	//if (bCharacterSelected == true)
+	//{
+	//	bCharacterSelected = false;
+
+	//	UGameplayStatics::OpenLevel(GetWorld(), FName("/Game/Levels/TopDownExampleMap"));
+	//	AsuraPlayerHUD->GetCharacterSelectionUIWidget()->HideWidget();
+
+	//	if (AsuraPlayerState->GetCurrentSelectedCharacterClass() == ECharacterClass::CC_Marauder)
+	//	{
+	//	
+
+	//		FTransform DefaultMarauderSpawn = FTransform(FQuat(0, 0, 0, 0), FVector(-900.0025, -10.0, 263.55352));
+	//		AMarauderCharacter* PlayerCurrentCharPawn = GetWorld()->SpawnActor<AMarauderCharacter>(MarauderClassTemplate,
+	//			DefaultMarauderSpawn);
+
+	//		//AActor* PlayerChar =
+	//		//UGameplayStatics::BeginSpawningActorFromClass(GetWorld(), MarauderClassTemplate, DefaultMarauderSpawn, true);
+	//		//UGameplayStatics::FinishSpawningActor(PlayerChar, DefaultMarauderSpawn);
+	//		UnPossess();
+	//		Possess(Cast<APawn>(PlayerCurrentCharPawn));
+
+	//		bCharacterSelected = false;
+	//		
+	//	}
+	//	else
+	//	{
+	//		FTransform DefaultTestCharSpawn = FTransform(FQuat(0, 0, 0, 0), FVector(-880.0025, -140.0, 263.55703));
+	//		
+	//		AAsuraCharacter* PlayerCurrentCharPawn = GetWorld()->SpawnActor<AAsuraCharacter>(TestClassTemplate,
+	//			DefaultTestCharSpawn);
+	//		//
+	//		//AActor* PlayerChar =
+	//		//UGameplayStatics::BeginSpawningActorFromClass(GetWorld(), TestClassTemplate, DefaultTestCharSpawn, true);
+	//		//UGameplayStatics::FinishSpawningActor(PlayerChar, DefaultTestCharSpawn);
+	//		
+	//		
+	//		UnPossess();
+	//		Possess(Cast<APawn>(PlayerCurrentCharPawn));
+
+	//		bCharacterSelected = false;
+
+	//	}
+	//}
+
 }
 
 void AAsuraPlayerController::SetupInputComponent()
